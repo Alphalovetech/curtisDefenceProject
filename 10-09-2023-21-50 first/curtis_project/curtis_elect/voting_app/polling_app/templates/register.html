@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote</title>
+    <link rel="stylesheet" href="{% static 'assets/styles/reg_app.css' %}">
+    <!--<script src="reg_app.js"></script>-->
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+        }
+        
+        
+        
+        /*****************form styling*********/
+        form{
+          margin: 0;
+          display: grid;
+          
+          min-height: 100vh;
+        }
+        /*global styling*/
+        label{
+          margin-bottom: 1rem;
+        }
+        
+        input{
+          width: 100%;
+          padding: 0.75rem;
+          border: 1px solid #ccc;
+          border-radius: 0.25rem;
+        }
+        
+        .width-50{
+          width: 50%;
+        }
+        
+        .ml-auto{
+          margin-left: auto;
+        }
+        
+        .text-center{
+          text-align: center;
+          color: white;
+        }
+        .text-cent1{
+          margin-left: 5px;
+          margin-top: 10px;
+          margin-bottom: 2rem;
+          color:white;
+        }
+        
+        /*progress bar*/
+        .progressbar{
+          position: relative;
+          display: flex;
+          justify-content: space-between;
+          counter-reset: step; 
+        }
+        
+        .progressbar::before, .progress{
+          content: "";
+          position: absolute;
+          top: 50%;
+          transform: translateY(-1000%);
+          /*transform: translateY(-450%);*/
+          height:4px ;
+          width: 99%;
+          background-color: #dcdcdc;
+          z-index: -1;
+        }
+        
+        .progress{
+          background-color: #d43f8d;
+          width: 0%;
+          transition: all 0.3s ease;
+        }
+        
+        .progress-step{
+          width: 35px;
+          height: 35px;
+          background-color: #cdcdcd;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          
+        }
+        
+        .progress-step::before{
+          counter-increment: step;
+          content: counter(step);
+        }
+        
+        .progress-step-active{
+          background-color: #d43f8d;
+          color: #f3f3f3;
+        }
+        
+        
+        /*form*/
+        .form{
+          width: clamp(320px, 50%, 1000px);
+          margin: 0 auto;
+          border: transparent;
+          /* border: 1px solid #ccc; */
+          border-radius: 0.35rem;
+          padding: 1.5rem;
+        }
+        
+        .form-step{
+          display: none;
+        }
+        
+        .form-step-active{
+          display: block;
+        }
+        
+        .input-group{
+          margin: 2rem 0;
+          color: white;
+        }
+        
+        /*button styling*/
+        .btns-group{
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap:1.5rem;
+        }
+        .btn{
+          padding: 0.75rem ;
+          display:block;
+          background-color: #d43f8d;
+          color: #f3f3f3;
+          text-align: center;
+          border-radius: 00.25rem;
+          cursor: pointer;
+          transition:all 0.3s ease;
+        }
+        
+        .input-group select{
+          width: 100%;
+          padding: 0.75rem;
+          border: 1px solid #ccc;
+          border-radius: 0.25rem;
+          margin: 8px 0;
+          display: inline-block;
+          box-sizing: border-box;
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         
+        
+        /********** responsive media query start */
+        
+        
+        @media (max-width: 320px){
+          .logo{
+            width: 100px;
+          }
+          .logo img{
+            width: 130px;
+          }
+          
+        }
+        @media (max-width: 360px){
+          .logo{
+            width: 100px;
+          }
+          .logo img{
+            width: 130px;
+          }
+          
+        }
+        @media (max-width: 1104px){
+          .home .max-width{
+            margin-left: 0px;
+          }
+        }
+        @media (max-width: 991px){
+          .max-width{
+            padding: 0 50px;
+           }
+        }
+        @media (max-width: 947px){
+           .menu-btn{
+            display:block;
+            z-index: 999;
+          }
+           .menu-btn i.active:before{
+             content: "\f00d";
+           }
+           .navbar .menu{
+             position: fixed;
+             height: 100vh;
+             width: 100%;
+             left: -100%;
+             top: 0;
+             background: #111;
+             text-align: center;
+             padding-top: 80px;
+             transition: all 0.3s ease;
+           }
+           .navbar .menu.active{
+             left: 0;
+           }
+           .navbar .menu li{
+             display: block;
+           }
+           .navbar .menu li a{
+             display: inline-block;
+             margin: 20px 0;
+             font-size: 25px;
+           }
+           .home .home-content .text-1{
+            font-size: 45px;   
+          }
+        
+          .home .home-content .text-2{
+             font-size: 25px;
+          }
+        
+        }
+        /*@media (max-width: 947px){
+          .main-wrap{
+            width: 100px;
+          }
+          .footer-wrap{
+            position: relative;
+            margin-top: 200px;
+        
+            background: rgb(46, 44, 44);
+          }
+        }*/
+        
+        
+        
+        
+        
+        
+        
+    </style>
+    
+</head>
+<body style="margin-top: 0; background: linear-gradient(rgba(4,9,30,0.6), rgba(4,9,30,0.6)), url('{% static 'assets/images/pres4.jpg' %}'); background-position: top; background-repeat: no-repeat; background-size: cover;">
+    
+    <form action="#" class="form" style="border: transparent;">
+        {% csrf_token %}
+        <h1 class="text-center">Vote</h1>
+        
+        <!--progress bar-->
+        <div class="progressbar">
+            <div class="progress" id="progress"></div>
+            <div class="progress-step progress-step-active" style="background-color: #d43f8d; color: #f3f3f3;"></div>
+            <div class="progress-step"></div>
+            <!-- <div class="progress-step"></div>
+            <div class="progress-step"></div> -->
+        </div>
+        <!--steps-->
+        <div class="form-step form-step-active">
+            <h2 class="text-cent1">I. VOTER'S INFORMATION</h2>
+            <div class="input-group">
+                <label for="name">Voter's Name</label>
+                <input type="text" name="name" id="name" required>
+            </div>
+            <div class="input-group">
+                <label for="email">Voter's Email</label>
+                <input type="email" name="email" id="surname" required>
+            </div>
+            
+            
+            <!-- <div class="input-group">
+                <label for="nationality">nationality</label>
+                <select name="" id="country">
+                    <option value="country">Select Country</option>
+                    <option value="Cameroon">Cameroon</option>
+                    <option value="Congo">Congo</option>
+                    <option value="Nigeria">Nigeria</option>
+                    <option value="Tchad">Tchad</option>
+                    <option value="Equatorial Guinea ">Equatorial Guinea</option>
+                </select>
+                
+            </div>
+            
+            <div class="input-group">
+                <label for="P.O Box">P.O Box</label>
+                <input type="number" name="P.O Box" id="P.O Box">
+                
+            </div>
+            
+            <div class="input-group">
+                <label for="Father's Name">Father's Name</label>
+                <input type="text" name="Father's Name" id="Father's Name">
+                
+            </div>
+            <div class="input-group">
+                <label for="Mother's Name">Mother's Name</label>
+                <input type="text" name="Mother's Name" id="Mother's Name">
+                
+            </div>
+             -->
+            <div class="">
+                <a href="#" class="btn btn-next width-50 ml-auto" style="background-color: #d43f8d;">Next</a>
+            </div>
+        </div>
+
+
+        <!-- <div class="form-step">
+            <h2 class="text-cent1">II. CHOOSE YOUR TRAINING PROGRAM</h2>
+            <div class="input-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" required>
+            </div>
+            <div class="input-group">
+                <label for="Surname">Surname</label>
+                <input type="text" name="surname" id="surname" required>
+            </div>
+            
+            
+            <div class="input-group">
+                <label for="nationality">nationality</label>
+                <select name="" id="country">
+                    <option value="country">Select Country</option>
+                    <option value="Cameroon">Cameroon</option>
+                    <option value="Congo">Congo</option>
+                    <option value="Nigeria">Nigeria</option>
+                    <option value="Tchad">Tchad</option>
+                    <option value="Equatorial Guinea ">Equatorial Guinea</option>
+                </select>
+                
+            </div>
+            
+            <div class="input-group">
+                <label for="P.O Box">P.O Box</label>
+                <input type="number" name="P.O Box" id="P.O Box">
+                
+            </div>
+            
+            <div class="input-group">
+                <label for="Father's Name">Father's Name</label>
+                <input type="text" name="Father's Name" id="Father's Name">
+                
+            </div>
+            <div class="input-group">
+                <label for="Mother's Name">Mother's Name</label>
+                <input type="text" name="Mother's Name" id="Mother's Name">
+                
+            </div>
+            <div class="btns-group">
+                <a href="#" class="btn btn-prev ">Previous</a>
+                <a href="#" class="btn btn-next ">Next</a>
+            </div>
+        </div>
+
+        <div class="form-step">
+            <h2 class="text-cent1">II. CHOOSE YOUR TRAINING PROGRAM</h2>
+            <div class="input-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" required>
+            </div>
+            <div class="input-group">
+                <label for="Surname">Surname</label>
+                <input type="text" name="surname" id="surname" required>
+            </div>
+            
+            
+            <div class="input-group">
+                <label for="nationality">nationality</label>
+                <select name="" id="country">
+                    <option value="country">Select Country</option>
+                    <option value="Cameroon">Cameroon</option>
+                    <option value="Congo">Congo</option>
+                    <option value="Nigeria">Nigeria</option>
+                    <option value="Tchad">Tchad</option>
+                    <option value="Equatorial Guinea ">Equatorial Guinea</option>
+                </select>
+                
+            </div>
+            
+            <div class="input-group">
+                <label for="P.O Box">P.O Box</label>
+                <input type="number" name="P.O Box" id="P.O Box">
+                
+            </div>
+            
+            <div class="input-group">
+                <label for="Father's Name">Father's Name</label>
+                <input type="text" name="Father's Name" id="Father's Name">
+                
+            </div>
+            <div class="input-group">
+                <label for="Mother's Name">Mother's Name</label>
+                <input type="text" name="Mother's Name" id="Mother's Name">
+                
+            </div>
+            <div class="btns-group">
+                <a href="#" class="btn btn-prev ">Previous</a>
+                <a href="#" class="btn btn-next ">Next</a>
+            </div>
+        </div> -->
+
+        <div class="form-step">
+            <h2 class="text-cent1">II. CHOOSE YOUR CANDIDATE</h2>
+            <div class="input-group">
+                <label for="name">Candidate's Post</label>
+                <select name="psot" id="post">
+                  <option value="Post">Select Candidate's Post</option>
+                  <option value="presidential">Presidential</option>
+                  <option value="senatorial">Senatorial</option>
+                  
+                  
+              </select>
+               
+            </div>
+            <!-- <div class="input-group">
+                <label for="Surname">Surname</label>
+                <input type="text" name="surname" id="surname" required>
+            </div> -->
+            
+            
+            <div class="input-group">
+                <label for="nationality">Choose Candidate</label>
+                <select name="candidate" id="candidate">
+                    <option value="candidate">Select Candidate</option>
+                    <option value="curtis">Yenseh Curtis</option>
+                    <option value="charlie">Charlie Dabs</option>
+                    <option value="don">Don Dabilie</option>
+                    <option value="tchad">Tchadin Percy</option>
+                    
+                </select>
+                
+            </div>
+            
+            <!-- <div class="input-group">
+                <label for="P.O Box">P.O Box</label>
+                <input type="number" name="P.O Box" id="P.O Box">
+                
+            </div>
+            
+            <div class="input-group">
+                <label for="Father's Name">Father's Name</label>
+                <input type="text" name="Father's Name" id="Father's Name">
+                
+            </div>
+            <div class="input-group">
+                <label for="Mother's Name">Mother's Name</label>
+                <input type="text" name="Mother's Name" id="Mother's Name">
+                
+            </div> -->
+            <div class="btns-group">
+                <a href="#" class="btn btn-prev ">Previous</a>
+                <input type="submit" value="Submit" class="btn">
+            </div>
+        </div>
+    </form> 
+    <script src="{% static 'assets/js/register.js' %}"></script>
+</body>
+</html>
