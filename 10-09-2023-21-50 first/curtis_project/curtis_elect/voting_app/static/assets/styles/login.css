@@ -1,0 +1,31 @@
+/* *{
+    padding:0;
+    margin: 0;
+    box-sizing: border-box;
+} */
+
+body{
+    /* background: linear-gradient(90deg); */
+    background: crimson;
+}
+
+.form{
+    width: 40%;
+    background-color: crimson;
+    padding: 50px;
+    margin-top: 150px;
+    border-radius: 20px;
+}
+
+.btn-primary{
+    width: 100%;
+    background-color:rgb(128, 139, 240);
+    padding: 5px;
+    border: none;
+    border-radius: 50px;
+}
+
+h1{
+    font-size: 2rem !important;
+    font-weight: 700;
+}

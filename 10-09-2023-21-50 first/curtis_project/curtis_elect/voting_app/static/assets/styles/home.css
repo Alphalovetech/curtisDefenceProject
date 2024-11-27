@@ -1,0 +1,127 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    position: relative;
+}
+
+
+
+body::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    background: rgb(241, 113, 134);
+    clip-path: inset(47% 0 0 0);
+    z-index: -1;
+    height: 100%;
+}
+
+::selection{
+    background: rgb(241, 113, 134);
+    color:white;
+}
+
+.container{
+    max-width: 950px;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    padding: 80px 0;
+}
+
+.container .main-card{
+    display: flex;
+    justify-content: space-evenly;
+    width: 190%;
+    transition: 1s;
+}
+
+#two:checked ~ .main-card{
+    margin-left: -100%;
+}
+
+.container .main-card .cards{
+    width: calc(100% / 2 - 10px);
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 20px;
+    justify-content: space-between;
+
+}
+
+/* .cards .card .content{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} */
+
+.main-card .cards .card:hover{
+    transform: translateY(-15px);
+}
+
+.main-card .cards .card{
+    width: calc(100% / 2 - 10px);
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 25);
+    transition: all 0.4s ease;
+}
+
+.cards .card .content .img img{
+    height: 100%;
+    width: 100%;
+    border: 3px solid rgb(253, 201, 210);
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.card .content .name{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.card .content .position{
+    font-size: 20px;
+    color: rgb(241, 113, 134);
+}
+
+.card .content .media-icons{
+    margin-top: 10px;
+    display: flex;
+
+}
+
+.media-icons a{
+    text-align: center;
+    line-height: 33px;
+    height: 35px;
+    width: 35px;
+    margin: 0 4px;
+    font-size: 14px;
+    color: #fff;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    background: rgb(241, 113, 134);
+    transition: all 0.3s ease ;
+}
+
+.media-icons a:hover{
+    color:rgb(241, 113, 134) ;
+    background-color: #fff;
+    border-color: rgb(241, 113, 134);
+}
+
+
+

@@ -1,0 +1,19 @@
+body{
+    margin: 0;
+}
+
+.fwh-slide{
+    height: 80vh; /*vh stands for viewport height*/
+    background-color: white;
+    box-sizing: border-box;
+}
+
+.categories {
+    height: 100vh;
+    margin-top: 20px;
+    
+    align-items: center;
+}
+div.carousel-caption{
+    margin-bottom: 100px;
+}
